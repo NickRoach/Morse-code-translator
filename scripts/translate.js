@@ -24,9 +24,7 @@ function translator(input, id){
         }
         
         lettersString = lettersString.toLowerCase(); //uppercase and lowercase have the same morse codes
-        wordsArray = lettersString.split(" ");
-        // console.log("lettersArray: " +lettersArray);
-        
+        wordsArray = lettersString.split(" ");        
         wordsArray.forEach(word => {
             let characters = word.split("");
 
@@ -50,16 +48,17 @@ function translator(input, id){
         let morseWords = [];
         let morseString = "";
         let lettersOutString = [];
-
+        let spaceFlag = false;
         morseString = input;
 
         //check to make sure the most recently input character is either a dot, dash or space
         const myRE = /[.\- ]/;
         if(input.length > 0 && !myRE.test(input[input.length-1])){
             morseString = morseString.slice(0, -1); //this removes the unsupported character that has just been input so that it never displays
-            alert("Please enter only the characters \".\", \"-\" and \"space\"");
+            alert("Please enter only the characters \".\", \"-\" and \"space\" in this box");
             outPut[1] = "-1"; 
         }
+
 
         morseWords = morseString.split("    "); //split the morse code into words
 
