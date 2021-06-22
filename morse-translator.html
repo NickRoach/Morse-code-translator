@@ -9,8 +9,22 @@
 </head>
 <body>
     <h1>Nick's Morse Code Translator</h1>
-    <textarea class="textbox" id="letters" placeHolder="Input letters here"></textarea>
-    <textarea class="textbox" id="morse" placeHolder="Input Morse Code here"></textarea>
+    <div class="boxes">
+        <textarea class="textbox" id="letters" placeHolder="Input letters here"></textarea>
+        <textarea class="textbox" id="morse" placeHolder="Input Morse Code here"></textarea>
+    </div>
+    <p>
+        This translator works in both directions. You can enter letters on the left or Morse Code on the right and the opposite box will be updated automatically.
+    </p>
+    <p>
+        Supported characters are letters A-Z in upper- and lower-case, numbers 0-9 and the punctuation marks .,?!
+    </p>
+    <p>
+        Delimit Morse characters with a single space, and Morse words with two spaces (which will be automatically converted to four). 
+    </p>
+    <p>
+        When entering a Morse Code character, the symbol [ ] will be displayed until a valid code has been input.
+    </p>
 </body>
 <script src="scripts/translate.js"></script>
 <script src="scripts/DOM.js"></script>
