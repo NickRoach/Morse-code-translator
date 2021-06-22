@@ -1,27 +1,25 @@
 import {cypher, reverseCypher} from "./cypher.js";
 
 function translator(input, id){
-    let wordsArray = [];
-    let morseArray = [];
-    let lettersArray = [];
-    let morseWords = [];
-    let lettersString = "";
-    let morseString = "";
+    
+    
+    let outPut = [null, null];
     console.clear();
-
-
-
-
     
     //if something has been modified in the letters box
     if(id === "letters") {
+        let wordsArray = [];
+        let morseArray = [];
+        let lettersString = "";
+        let morseOutString = "";
+        
         lettersString = input;
-                
+        
         //check to make sure the most recently input character is supported
         const myRE = /[a-z]|[A-Z]|[0-9]|[ .,?'!]/;
         if(!myRE.test(input[input.length-1])){
             lettersString = lettersString.slice(0, -1); //this removes the unsupported character that has just been input so that it never displays
-            // displayText("letters", lettersString);
+            outPut[0] = "-1";
             alert(`The character \"${input[input.length-1]}\" is not supported`);
         }
         
@@ -39,39 +37,29 @@ function translator(input, id){
             morseArray.push("   "); //add three more spaces between words (there is already one after the final letter)
         });
         
-        morseString = morseArray.join("");
-        morseString = morseString.slice(0, -4); //remove the four trailing spaces
-        // displayText("morse", morseString);
-        return morseString;
+        morseOutString = morseArray.join("");
+        morseOutString = morseOutString.slice(0, -4); //remove the four trailing spaces
+        outPut[1] = morseOutString;
     }
-
-
-
-
-
 
 
     //if something has been modified in the Morse Code box
     if(id === "morse") {
+
+        let lettersArray = [];
+        let morseWords = [];
+        let morseString = "";
+        let lettersOutString = [];
+
         morseString = input;
 
         //check to make sure the most recently input character is either a dot, dash or space
         const myRE = /[.\- ]/;
         if(input.length > 0 && !myRE.test(input[input.length-1])){
-            morseString = morseString.slice(-1); //this removes the unsupported character that has just been input so that it never displays
-            // displayText("morse", morseString);
-            
+            morseString = morseString.slice(0, -1); //this removes the unsupported character that has just been input so that it never displays
             alert("Please enter only the characters \".\", \"-\" and \"space\"");
+            outPut[1] = "-1"; 
         }
-
-        if (morseString.slice(-1) === " " && morseString.slice(-2) != "  "){
-            console.log("|" + morseString + "|");
-            morseString = morseString + "   ";
-            console.log("|" + morseString +"|");
-        }
-
-
-
 
         morseWords = morseString.split("    "); //split the morse code into words
 
@@ -82,19 +70,20 @@ function translator(input, id){
                 if(reverseCypher[char]){
                     lettersArray.push(reverseCypher[char]);
                 }
-                else lettersArray.push("[ ]");
+                else if (char)  {
+                    lettersArray.push("[ ]");
+                }
             });
 
             lettersArray.push(" "); //add a space between the words
         });
 
-        lettersString = lettersArray.join("");
-       
-        lettersString = lettersString.slice(0, -1); //remove the trailing space
-
-        // displayText("letters", lettersString);
-        return(lettersString);
+        lettersOutString = lettersArray.join("");      
+        lettersOutString = lettersOutString.slice(0, -1); //remove the trailing space
+        outPut[0] = lettersOutString;
     }
+    console.log(outPut);
+    return outPut;
 }
 
 export {translator}
