@@ -1,3 +1,5 @@
+import {cypher, reverseCypher} from "./cypher.js";
+
 function translator(input, id){
     let wordsArray = [];
     let morseArray = [];
@@ -6,6 +8,10 @@ function translator(input, id){
     let lettersString = "";
     let morseString = "";
     console.clear();
+
+
+
+
     
     //if something has been modified in the letters box
     if(id === "letters") {
@@ -15,7 +21,7 @@ function translator(input, id){
         const myRE = /[a-z]|[A-Z]|[0-9]|[ .,?'!]/;
         if(!myRE.test(input[input.length-1])){
             lettersString = lettersString.slice(0, -1); //this removes the unsupported character that has just been input so that it never displays
-            displayText("letters", lettersString);
+            // displayText("letters", lettersString);
             alert(`The character \"${input[input.length-1]}\" is not supported`);
         }
         
@@ -35,8 +41,13 @@ function translator(input, id){
         
         morseString = morseArray.join("");
         morseString = morseString.slice(0, -4); //remove the four trailing spaces
-        displayText("morse", morseString);
+        // displayText("morse", morseString);
+        return morseString;
     }
+
+
+
+
 
 
 
@@ -47,8 +58,8 @@ function translator(input, id){
         //check to make sure the most recently input character is either a dot, dash or space
         const myRE = /[.\- ]/;
         if(input.length > 0 && !myRE.test(input[input.length-1])){
-            morseString = morseString.slice(0, -1); //this removes the unsupported character that has just been input so that it never displays
-            displayText("morse", morseString);
+            morseString = morseString.slice(-1); //this removes the unsupported character that has just been input so that it never displays
+            // displayText("morse", morseString);
             
             alert("Please enter only the characters \".\", \"-\" and \"space\"");
         }
@@ -81,10 +92,9 @@ function translator(input, id){
        
         lettersString = lettersString.slice(0, -1); //remove the trailing space
 
-        console.log(morseString.slice(-4));
-
-        displayText("letters", lettersString);
+        // displayText("letters", lettersString);
+        return(lettersString);
     }
 }
 
-// export {translator}
+export {translator}

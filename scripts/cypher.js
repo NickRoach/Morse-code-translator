@@ -54,4 +54,4 @@ function objectFlip(obj) {
     return ret;
 }
 
-// export {cypher, reverseCypher};
+export {cypher, reverseCypher};
